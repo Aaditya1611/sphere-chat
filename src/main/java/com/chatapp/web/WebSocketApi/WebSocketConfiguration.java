@@ -12,7 +12,6 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer{
 	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		// http url for the websocket handshake
 		registry.addEndpoint("/websocket");
 	}
 	
