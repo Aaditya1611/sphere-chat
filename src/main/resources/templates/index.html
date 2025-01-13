@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login-page.css">
+    <title>Sphere</title>
+</head>
+
+<body>
+	<div th:if="${param.error}">
+	            Invalid username and password.
+	        </div>
+	        <div th:if="${param.logout}">
+	            You have been logged out.
+	        </div>
+    <div class="app-header">
+        <div class="app-title">
+            <h1 class="h1-app-title">Sphere</h1>
+        </div>
+        <div class="create-account">
+            <a class="create-account-link" href="create-account.html">Create an account</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="welcome-menu">
+            <p class="welcome-text">Welcome back</p>
+            <p class="welcome-greetings">Enter your untitled account details</p>
+            <div class="or">
+                <hr>
+            </div>
+            <div class="user-form">
+                <form th:action="@{/index}" method="post">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <div class="username">
+                        <input type="text" placeholder="Email or username" id="input-field" required name="username">
+                    </div>
+                    <div class="password">
+                        <input type="password" placeholder="Password" id="input-field" required name="password">
+                        <div class="password-options">
+                            <div class="separator-checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <label for="checkbox">Keep me signed in</label>
+                            </div>
+                            <div class="separator-forgot-password">
+                                <a class="forgot-password-text" href="forgot-password.html">Forgot Password?</a>
+                            </div>
+                        </div>
+                    </div>
+					<div><input type="submit" value="Sign In"></div>
+                </form>
+                 <div class="sign-in-options">
+                    <button class="sign-in-button">Sign In</button>
+                </div> 
+            </div>
+        </div>
+        <div class="help-section">
+            <a class="troubleshoot" href="help-section.html">Trouble signing In</a>
+        </div>
+    </div>
+</body>
+
+</html>

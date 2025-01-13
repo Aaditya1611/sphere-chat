@@ -6,8 +6,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 @EnableWebSecurity
 @Configuration
@@ -15,14 +19,17 @@ public class springSecurityConfigurer {
 	
 	@Bean
 	public InMemoryUserDetailsManager userDetailsService() {
-			@SuppressWarnings("deprecation")
+	PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			
 			UserDetails user = 
-					User.withDefaultPasswordEncoder()
+					User.builder()
 						.username("optimus")
-						.password("prime")
-						.roles("USER")
+						.password(encoder.encode("prime"))
+					.roles("USER")
 						.build();
-		return new InMemoryUserDetailsManager(user);
+			
+	return new InMemoryUserDetailsManager(user);
 	}
 	
 	@Bean
@@ -30,12 +37,14 @@ public class springSecurityConfigurer {
 		
 		http
 			.authorizeHttpRequests((requests) -> requests
-					.requestMatchers("/" , "/home").permitAll()
+					.requestMatchers("/css/**" , "/resources/**").permitAll()
+					.requestMatchers("/", "index").permitAll()
+					.requestMatchers("/hello").authenticated()
 					.anyRequest().authenticated()
 					)
 					.formLogin(formLogin -> formLogin
-							.loginPage("/login")
-							.permitAll()
+							.loginPage("/index").permitAll()
+							.successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
 							)
 					.logout((logout) -> logout
 							.permitAll()
