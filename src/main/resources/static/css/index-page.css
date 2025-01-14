@@ -116,7 +116,7 @@ label[for="checkbox"] {
     font-weight: 500;
 }
 
-.sign-in-button {
+#sign-in-button {
 
     margin-top: 15px;
     background-color: rgb(9, 96, 131);
