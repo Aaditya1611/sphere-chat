@@ -22,23 +22,11 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 @Configuration
 public class springSecurityConfigurer {
 	
-//	@Bean
-//	public InMemoryUserDetailsManager userDetailsService() {
-//	PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//			
-//			UserDetails user = 
-//					User.builder()
-//						.username("optimus")
-//						.password(encoder.encode("prime"))
-//					.roles("USER")
-//						.build();
-//			
-//	return new InMemoryUserDetailsManager(user);
-//	}
-	
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
 	
 	@Bean 
 	public AuthenticationProvider authProvider() {
@@ -62,7 +50,7 @@ public class springSecurityConfigurer {
 					)
 					.formLogin(formLogin -> formLogin
 							.loginPage("/index").permitAll()
-							.successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
+							.successHandler(myAuthenticationSuccessHandler)
 							)
 					.logout((logout) -> logout
 							.permitAll()

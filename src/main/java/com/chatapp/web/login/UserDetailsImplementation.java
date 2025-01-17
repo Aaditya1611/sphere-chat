@@ -10,9 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsImplementation implements UserDetails{
 
-	private Optional<User> user;
+	private User user;
 	
-	public UserDetailsImplementation(Optional<User> user) {
+	public UserDetailsImplementation(User user) {
 		super();
 		this.user = user;
 	}
@@ -25,14 +25,14 @@ public class UserDetailsImplementation implements UserDetails{
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return user.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return user.getUsername();
 	}
 	
 	@Override
