@@ -21,7 +21,7 @@
                 <p class="greeting-text">Enter your details to Begin</p>
             </div>
             <div class="user-details">
-                <form action="#">
+                <form th:action="@{/sign-up-page}" method="post">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <div class="email-id">
                         <input type="text" placeholder="Enter your Email id" id="email-id" required>

@@ -12,5 +12,6 @@ public class landingPageController implements WebMvcConfigurer {
 		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/index").setViewName("index");
 		registry.addViewController("/hello").setViewName("hello");
+		registry.addViewController("/sign-up-page").setViewName("sign-up-page");
 	}
 }

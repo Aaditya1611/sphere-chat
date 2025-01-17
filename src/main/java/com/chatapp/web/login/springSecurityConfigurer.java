@@ -33,7 +33,7 @@ public class springSecurityConfigurer {
 		
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailsService);
-		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+		provider.setPasswordEncoder(new BCryptPasswordEncoder());
 		return provider;
 	}
 	
@@ -45,6 +45,7 @@ public class springSecurityConfigurer {
 			.authorizeHttpRequests((requests) -> requests
 					.requestMatchers("/css/**" , "/resources/**").permitAll()
 					.requestMatchers("/", "index").permitAll()
+					.requestMatchers("sign-up-page").permitAll()
 					.requestMatchers("/hello").authenticated()
 					.anyRequest().authenticated()
 					)
