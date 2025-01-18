@@ -45,8 +45,7 @@ public class springSecurityConfigurer {
 			.authorizeHttpRequests((requests) -> requests
 					.requestMatchers("/css/**" , "/resources/**").permitAll()
 					.requestMatchers("/", "index").permitAll()
-					.requestMatchers("sign-up-page").permitAll()
-					.requestMatchers("/hello").authenticated()
+					.requestMatchers("signup").permitAll()
 					.anyRequest().authenticated()
 					)
 					.formLogin(formLogin -> formLogin

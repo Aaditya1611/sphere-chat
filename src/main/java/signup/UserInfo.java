@@ -1,32 +1,33 @@
-package com.chatapp.web.login;
+package signup;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "credentials")
-public class User {
-
+public class UserInfo {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Column(name="username")
+	//private String emailId;
 	private String username;
-	
-	@Column(name="password")
 	private String password;
 	
-	public long getId() {
+	
+	public long getid() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setid(int id) {
 		this.id = id;
 	}
+//	public String getEmailId() {
+//		return emailId;
+//	}
+//	public void setEmailId(String emailId) {
+//		this.emailId = emailId;
+//	}
 	public String getUsername() {
 		return username;
 	}
@@ -40,4 +41,5 @@ public class User {
 		this.password = password;
 	}
 	
+
 }
